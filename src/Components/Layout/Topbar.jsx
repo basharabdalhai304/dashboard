@@ -6,8 +6,17 @@ import Typography from '@mui/material/Typography';
 import { styled, alpha } from '@mui/material/styles';
 import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
-
-
+import Stack from '@mui/material/Stack';
+import DeleteIcon from '@mui/icons-material/Delete';
+import AlarmIcon from '@mui/icons-material/Alarm';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import { Box } from "@mui/material";
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import PersonIcon from '@mui/icons-material/Person';
+import SettingsIcon from '@mui/icons-material/Settings';
+import LightModeIcon from '@mui/icons-material/LightMode';
+import { useTheme } from "@mui/material";
 const drawerWidth = 240;
 
 const AppBar = styled(MuiAppBar, {
@@ -73,9 +82,24 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 
+
+
+
 /*======================Components========================= */
 
-const Topbar = ({ open, handleDrawerOpen }) => {
+const Topbar = ({ open, handleDrawerOpen, setMode }) => {
+  /*=======================isDarkMode======================== */
+  // const [isDarkMode, SetisDarkMode] = useState(false);
+  // const handleDarkMode = () => {
+  //   if (!isDarkMode) {
+  //     SetisDarkMode(true);
+  //     return;
+  //   }
+  //   SetisDarkMode(false);
+  // }
+
+  const Theme = useTheme();
+
   return (
     <AppBar position="fixed" open={open}>
       <Toolbar>
@@ -96,14 +120,49 @@ const Topbar = ({ open, handleDrawerOpen }) => {
         </Typography>
 
         <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </Search>
+          <SearchIconWrapper>
+            <SearchIcon />
+          </SearchIconWrapper>
+          <StyledInputBase
+            placeholder="Search…"
+            inputProps={{ 'aria-label': 'search' }}
+          />
+        </Search>
+
+        <Box flexGrow={1}>
+
+        </Box>
+
+        <Stack direction="row" spacing={1}>
+
+
+          {
+            Theme.palette.mode === "light" ? (
+              <IconButton color="inherit" onClick={() => {
+                setMode(prevMode => prevMode === 'light' ? 'dark' : 'light');
+              }}>
+                <DarkModeIcon />
+              </IconButton>
+            ) : (
+              <IconButton color="inherit" onClick={() => {
+                setMode(prevMode => prevMode === 'light' ? 'dark' : 'light');
+              }}>
+                <LightModeIcon />
+              </IconButton>
+            )
+          }
+
+
+          <IconButton color="inherit">
+            <NotificationsIcon />
+          </IconButton>
+          <IconButton color="inherit" >
+            <SettingsIcon />
+          </IconButton>
+          <IconButton color="inherit">
+            <PersonIcon />
+          </IconButton>
+        </Stack>
       </Toolbar>
     </AppBar>
   );

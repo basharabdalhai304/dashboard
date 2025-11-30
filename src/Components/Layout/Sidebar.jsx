@@ -14,8 +14,6 @@ import { styled } from '@mui/material';
 import MuiDrawer from '@mui/material/Drawer';
 import { useTheme } from '@mui/material/styles';
 
-
-
 const drawerWidth = 240;
 const openedMixin = (theme) => ({
   width: drawerWidth,

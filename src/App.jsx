@@ -16,7 +16,9 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import Topbar from './Components/Layout/Topbar';
 import Sidebar from './Components/Layout/Sidebar';
-
+import { ThemeProvider } from '@mui/material';
+import { createTheme } from '@mui/material';
+import { getDesignTokens } from '../src/Theme/Darklight';
 
 
 
@@ -33,10 +35,19 @@ export default function MiniDrawer() {
     setOpen(false);
   };
 
+
+  const [mode,setMode] = React.useState('dark');
+
+
+  // Update the theme only if the mode changes
+  const theme = React.useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
+
   return (
+    <ThemeProvider theme={theme}>
+
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <Topbar open={open} handleDrawerOpen={handleDrawerOpen}/>
+      <Topbar open={open} handleDrawerOpen={handleDrawerOpen} setMode={setMode}/>
       <Sidebar open={open} handleDrawerClose={handleDrawerClose}/>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         
@@ -46,5 +57,6 @@ export default function MiniDrawer() {
         
       </Box>
     </Box>
+    </ThemeProvider>
   );
 }
