@@ -140,12 +140,15 @@ const Topbar = ({ open, handleDrawerOpen, setMode }) => {
             Theme.palette.mode === "light" ? (
               <IconButton color="inherit" onClick={() => {
                 setMode(prevMode => prevMode === 'light' ? 'dark' : 'light');
+                localStorage.setItem('savemode',Theme.palette.mode==='dark'?'light':'dark');
               }}>
                 <DarkModeIcon />
               </IconButton>
             ) : (
               <IconButton color="inherit" onClick={() => {
                 setMode(prevMode => prevMode === 'light' ? 'dark' : 'light');
+                localStorage.setItem('savemode',Theme.palette.mode==='dark'?'light':'dark');
+
               }}>
                 <LightModeIcon />
               </IconButton>

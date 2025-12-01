@@ -36,8 +36,11 @@ export default function MiniDrawer() {
   };
 
 
-  const [mode,setMode] = React.useState('dark');
-
+  
+  const currentMode = localStorage.getItem('savemode')?localStorage.getItem('savemode'):'light';
+  const [mode,setMode] = React.useState(currentMode);
+  
+  
 
   // Update the theme only if the mode changes
   const theme = React.useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
