@@ -19,6 +19,7 @@ import Sidebar from './Components/Layout/Sidebar';
 import { ThemeProvider } from '@mui/material';
 import { createTheme } from '@mui/material';
 import { getDesignTokens } from '../src/Theme/Darklight';
+import { Outlet } from 'react-router-dom';
 
 
 
@@ -53,11 +54,7 @@ export default function MiniDrawer() {
       <Topbar open={open} handleDrawerOpen={handleDrawerOpen} setMode={setMode}/>
       <Sidebar open={open} handleDrawerClose={handleDrawerClose}/>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        
-        <Typography sx={{ marginBottom: 2 }}>
-          Lorem ipsum
-        </Typography>
-        
+        <Outlet />
       </Box>
     </Box>
     </ThemeProvider>
