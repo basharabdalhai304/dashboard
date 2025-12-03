@@ -53,7 +53,17 @@ export default function MiniDrawer() {
       <CssBaseline />
       <Topbar open={open} handleDrawerOpen={handleDrawerOpen} setMode={setMode}/>
       <Sidebar open={open} handleDrawerClose={handleDrawerClose}/>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          p: 0,
+          width: '100%',
+          minHeight: '100vh',
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+      >
         <Outlet />
       </Box>
     </Box>

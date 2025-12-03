@@ -1,7 +1,13 @@
+import { DataGrid } from '@mui/x-data-grid';
+import { rows,columns } from './data.jsx';
 
-export function Manage(){
-    return(
-        <h3>Manage</h3>
-    )
+export function Manage() {
+    
+
+  return (
+    <div style={{ height: 500, width: '90%',margin:'80px auto' }}>
+      <DataGrid rows={rows} columns={columns} />
+      
+    </div>
+  );
 }
-
