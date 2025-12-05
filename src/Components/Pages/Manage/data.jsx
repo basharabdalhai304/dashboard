@@ -14,7 +14,7 @@
         { field: 'id', headerName: 'ID', width: 200 },
         { field: 'name', headerName: 'Name', width: 200 },
         { field: 'email', headerName: 'Email', width: 200 },
-        { field: 'age', headerName: 'Age', width: 100 },
+        { field: 'age', headerName: 'Age', width: 100 ,flex:1},
         { field: 'phone', headerName: 'Phone', width: 300 },
         {
             field: 'access',

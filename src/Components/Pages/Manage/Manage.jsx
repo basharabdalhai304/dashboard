@@ -5,7 +5,7 @@ export function Manage() {
     
 
   return (
-    <div style={{ height: 500, width: '90%',margin:'80px auto' }}>
+    <div style={{ height: 500, width: '95%',margin:'80px auto' }}>
       <DataGrid rows={rows} columns={columns} />
       
     </div>

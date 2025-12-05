@@ -1,7 +1,16 @@
+import { DataGrid } from '@mui/x-data-grid';
+import { rows,columns } from './data.js';
 
 export function Contacts(){
     return(
-        <h3>Contacts Info</h3>
+        <div style={{ height: 500, width: '95%',margin:'80px auto' }}>
+      <DataGrid 
+        rows={rows} 
+        columns={columns}
+        showToolbar
+      />
+      
+    </div>
     )
 }
 
