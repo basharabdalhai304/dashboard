@@ -1,68 +1,134 @@
-import { TextField } from "@mui/material";
-import { Stack, Box } from "@mui/material";
-import MenuItem from '@mui/material/MenuItem';
-import { Button } from "@mui/material";
+import { TextField, Stack, Box, MenuItem, Button } from "@mui/material";
 import { useForm } from "react-hook-form";
-
-
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
 export function ProfileForm() {
+ 
+  const schema = yup.object({
+    firstName: yup
+      .string()
+      .required("First name is required")
+      .min(3, "Must be at least 3 characters")
+      .max(20, "Must be at most 20 characters"),
 
-    const {
-    // eslint-disable-next-line no-unused-vars
+    lastName: yup
+      .string()
+      .required("Last name is required")
+      .min(3, "Must be at least 3 characters")
+      .max(20, "Must be at most 20 characters"),
+
+    email: yup
+      .string()
+      .email("Enter a valid email")
+      .required("Email is required"),
+
+    contact: yup
+      .string()
+      .required("Contact number is required"),
+
+    address: yup
+      .string()
+      .required("Address is required"),
+
+    role: yup.string().required("Role is required"),
+  });
+
+  
+  const {
     register,
     handleSubmit,
-    // eslint-disable-next-line no-unused-vars
-    watch,
-    // eslint-disable-next-line no-unused-vars
     formState: { errors },
-  } = useForm()
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
 
-  const onSubmit = () => console.log("doneeeee")
-    
+  const onSubmit = (data) => {
+    console.log("Form Data:", data);
+  };
 
-    const currencies = [
-        {
-            value: 'Admin',
-            label: 'Admin',
-        },
-        {
-            value: 'User',
-            label: 'User',
-        },
+  const roles = [
+    { value: "Admin", label: "Admin" },
+    { value: "User", label: "User" },
+  ];
 
-    ];
-    return (
-        <Box component="form" onSubmit={handleSubmit(onSubmit)} style={{ margin: '80px 20px', display: 'flex', flexDirection: 'column', gap: 3 }}>
+  return (
+    <Box
+      component="form"
+      onSubmit={handleSubmit(onSubmit)}
+      sx={{ margin: "80px 20px", display: "flex", flexDirection: "column", gap: 3 }}
+    >
+      
+      <Stack sx={{ gap: 2 }} direction="row">
+        <TextField
+          {...register("firstName")}
+          error={!!errors.firstName}
+          helperText={errors.firstName?.message}
+          label="First Name"
+          variant="filled"
+          sx={{ flex: 1 }}
+        />
+        <TextField
+          {...register("lastName")}
+          error={!!errors.lastName}
+          helperText={errors.lastName?.message}
+          label="Last Name"
+          variant="filled"
+          sx={{ flex: 1 }}
+        />
+      </Stack>
 
-            <Stack sx={{ gap: 2 }} direction={'row'}>
-                <TextField sx={{ flex: 1 }} id="filled-basic" label="First Name" variant="filled" />
-                <TextField sx={{ flex: 1 }} id="filled-basic" label="Last Name" variant="filled" />
+      
+      <TextField
+        {...register("email")}
+        error={!!errors.email}
+        helperText={errors.email?.message}
+        label="Email"
+        variant="filled"
+        sx={{ width: "100%", margin: "5x auto" }}
+      />
 
-            </Stack>
-            <TextField sx={{ width: '100%', margin: '20px auto' }} id="filled-basic" label="Email" variant="filled" />
-            <TextField sx={{ width: '100%', margin: '10px auto' }} id="filled-basic" label="Contact Number" variant="filled" />
-            <TextField sx={{ width: '100%', margin: '10px auto' }} id="filled-basic" label="Address" variant="filled" />
+      
+      <TextField
+        {...register("contact")}
+        error={!!errors.contact}
+        helperText={errors.contact?.message}
+        label="Contact Number"
+        variant="filled"
+        sx={{ width: "100%", margin: "5px auto" }}
+      />
 
-            <TextField
-                id="outlined-select-currency"
-                select
-                label="Role"
-                defaultValue="User"
-                helperText="Please select your currency"
-                sx={{ margin: '20px 0' }}
-            >
-                {currencies.map((option) => (
-                    <MenuItem key={option.value} value={option.value}>
-                        {option.label}
-                    </MenuItem>
-                ))}
-            </TextField>
+      
+      <TextField
+        {...register("address")}
+        error={!!errors.address}
+        helperText={errors.address?.message}
+        label="Address"
+        variant="filled"
+        sx={{ width: "100%", margin: "5px auto" }}
+      />
 
-            <Button type="submit" variant='contained'>
-                Create New User
-            </Button>
-        </Box>
-    )
+      
+      <TextField
+        {...register("role")}
+        select
+        error={!!errors.role}
+        helperText={errors.role?.message || "Please select your role"}
+        label="Role"
+        defaultValue="User"
+        sx={{ margin: "10px 0" }}
+      >
+        {roles.map((option) => (
+          <MenuItem key={option.value} value={option.value}>
+            {option.label}
+          </MenuItem>
+        ))}
+      </TextField>
+
+      
+      <Button type="submit" variant="contained">
+        Create New User
+      </Button>
+    </Box>
+  );
 }
-
